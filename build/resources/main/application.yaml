@@ -1,7 +1,0 @@
-server:
-  port: 8006
-
-telegram-bot:
-  botUserName: ${BOT_USERNAME}
-  botToken: ${BOT_TOKEN}
-  webHookPath: ${WEBHOOK_PATH}

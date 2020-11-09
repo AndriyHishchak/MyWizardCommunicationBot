@@ -1,8 +1,0 @@
-com/home/MyWizardBot/MyWizardBotApplication.java
- com.home.MyWizardBot.MyWizardBotApplication
-com/home/MyWizardBot/controller/WebHookController.java
- com.home.MyWizardBot.controller.WebHookController
-com/home/MyWizardBot/MyWizardTelegramBot.java
- com.home.MyWizardBot.MyWizardTelegramBot
-com/home/MyWizardBot/appConfig/BotConfig.java
- com.home.MyWizardBot.appConfig.BotConfig
