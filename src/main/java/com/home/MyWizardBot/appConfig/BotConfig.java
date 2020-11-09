@@ -19,10 +19,9 @@ public class BotConfig {
     private String botUserName;
     private String botToken;
 
-    //Create bean MyWizardTelegramBot
+
     @Bean
     public MyWizardTelegramBot MyCommunicationTelegramBot() {
-        DefaultBotOptions options = ApiContext.getInstance(DefaultBotOptions.class);
 
         MyWizardTelegramBot myCommunicationTelegramBot = new MyWizardTelegramBot();
         myCommunicationTelegramBot.setBotUserName(botUserName);
