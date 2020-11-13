@@ -9,7 +9,6 @@ public class MyWizardBotApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(MyWizardBotApplication.class, args);
-		
 	}
 
 }
