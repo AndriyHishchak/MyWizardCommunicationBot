@@ -2,6 +2,7 @@ package com.home.MyWizardBot;
 
 import com.home.MyWizardBot.botApi.TelegramFacade;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -23,6 +24,7 @@ public class MyWizardTelegramBot extends TelegramWebhookBot {
     }
 
 
+    @SneakyThrows
     @Override
     public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
         SendMessage replyMessageToUser = telegramFacade.handleUpdate(update);

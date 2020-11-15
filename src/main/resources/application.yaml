@@ -1,9 +1,9 @@
 server:
-  port: 8004
+  port: 8015
 
 localeTag: "ru-RU"
 
 telegram-bot:
   botUserName: ${BOT_USERNAME}
-#  botToken: ${BOT_TOKEN}
+  botToken: ${BOT_TOKEN}
   webHookPath: ${WEBHOOK_PATH}

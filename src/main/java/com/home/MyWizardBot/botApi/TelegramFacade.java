@@ -7,6 +7,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.io.IOException;
+
 @Component
 @Slf4j
 public class TelegramFacade {
@@ -19,7 +21,7 @@ public class TelegramFacade {
         this.botDataCache = botDataCache;
     }
 
-    public SendMessage handleUpdate(Update update) {
+    public SendMessage handleUpdate(Update update) throws IOException {
         SendMessage replyMessage = null;
 
         Message message = update.getMessage();
@@ -33,7 +35,7 @@ public class TelegramFacade {
         return replyMessage;
     }
 
-    private SendMessage handleInputMessage(Message message) {
+    private SendMessage handleInputMessage(Message message) throws IOException {
         String inputMessage = message.getText();
         int userId = message.getFrom().getId();
         BotState botState;
@@ -43,7 +45,7 @@ public class TelegramFacade {
             case "/start":
                 botState = BotState.ASK_DESTINY;
                 break;
-            case "Получити прогноз погоди":
+            case "/show_weather":
                 botState = BotState.FILLING_PROFILE;
                 break;
             case "Допомога":

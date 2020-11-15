@@ -7,6 +7,8 @@ public enum BotState {
     FILLING_PROFILE,
     ASK_CITY,
     ASK_DATE,
-    PROFILE_FILLED
+    PROFILE_FILLED,
+    ASK_ERROR;
+
 
 }

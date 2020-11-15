@@ -20,7 +20,7 @@ public class BotConfig {
 
     private String webHookPath;
     private String botUserName;
-    private String botToken = "1460285168:AAFxno35vzbc_uiD2HFp4Ys0vK9dSBSfeaE";
+    private String botToken;
 
 
     @Bean
