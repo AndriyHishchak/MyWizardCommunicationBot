@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8056
 
 localeTag: "ru-RU"
 
@@ -7,3 +7,14 @@ telegram-bot:
   botUserName: ${BOT_USERNAME}
   botToken: ${BOT_TOKEN}
   webHookPath: ${WEBHOOK_PATH}
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/Bot?useUnicode=true&serverTimezone=Europe/Kiev
+    username: mysql
+    password: mysql
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true

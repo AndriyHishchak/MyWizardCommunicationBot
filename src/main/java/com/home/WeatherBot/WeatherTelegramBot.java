@@ -26,7 +26,8 @@ public class WeatherTelegramBot extends TelegramWebhookBot {
     @SneakyThrows
     @Override
     public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
-        SendMessage replyMessageToUser = telegramFacade.handleUpdate(update);
+        final BotApiMethod<?> replyMessageToUser = telegramFacade.handleUpdate(update);
+
         return replyMessageToUser;
     }
 

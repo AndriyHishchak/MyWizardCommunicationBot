@@ -1,13 +1,12 @@
 package com.home.WeatherBot.cache;
 
 import com.home.WeatherBot.botApi.BotState;
-import com.home.WeatherBot.botApi.handlers.WeatherData;
+import com.home.WeatherBot.model.User;
 
 public interface DataCache {
-    BotState getUsersCurrentBotState (int userId);
-    void setUsersCurrentBotState (int userId,BotState botState);
+    BotState getUsersCurrentBotState (long userId);
+    void setUsersCurrentBotState (long userId,BotState botState);
 
-    WeatherData getWeatherData(int userId);
+    User getUserData(long userId);
 
-    void saveWeatherData(int userId, WeatherData weatherData);
 }

@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class WeatherService {
 
     public Weather getWeather(String cityName, Weather weather) throws IOException {
-
+        System.out.println("!!!!!!! "+ cityName+ "!!!!!!!!!");
         URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=metric&appid=b805ebd38f800bf523655a502bb5be62");
 
 

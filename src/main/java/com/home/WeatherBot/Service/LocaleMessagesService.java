@@ -16,7 +16,9 @@ public class LocaleMessagesService {
         this.messageSource = messageSource;
     }
 
-    public String getMessage(String mesege) {
-        return messageSource.getMessage(mesege,null,locale);
+    public String getMessage(String message) {
+        return messageSource.getMessage(message, null, locale);
     }
+
+
 }
