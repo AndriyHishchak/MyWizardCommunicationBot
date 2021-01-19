@@ -22,7 +22,7 @@ public class TelegramFacade {
 
     private final BotStateContext botStateContext;
     private final BotDataCache botDataCache;
-    private MainMenuService mainMenuService;
+    private final MainMenuService mainMenuService;
     private final ReplyMessagesService messagesService;
 
     public TelegramFacade(BotStateContext botStateContext, BotDataCache botDataCache, MainMenuService mainMenuService, ReplyMessagesService messagesService) {
@@ -55,7 +55,6 @@ public class TelegramFacade {
     }
 
 
-
     private SendMessage handleInputMessage(Message message) throws IOException {
         String inputMessage = message.getText();
         long userId = message.getFrom().getId();
@@ -66,13 +65,16 @@ public class TelegramFacade {
             case "/start":
                 botState = BotState.WELCOME_MENU;
                 break;
-            case "Show weather":
+            case "\uD83C\uDF26 Show weather":
                 botState = BotState.FILLING_WEATHER_REQUEST;
                 break;
-            case "Subscription":
+            case "\uD83D\uDCC6 Subscribe":
                 botState = BotState.ADD_SUBSCRIPTION;
                 break;
-            case "Help":
+            case "❌ Unsubscribe":
+                botState = BotState.DELETE_SUBSCRIPTION;
+                break;
+            case "\uD83D\uDCAC Help":
                 botState = BotState.SHOW_HELP_MENU;
                 break;
             default:
@@ -87,19 +89,30 @@ public class TelegramFacade {
     private BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) throws TelegramApiException {
         final long chatId = buttonQuery.getMessage().getChatId();
         final long userId = buttonQuery.getFrom().getId();
-        BotApiMethod<?> callBackAnswer = mainMenuService.getMainMenuMessage(chatId, "Воспользуйтесь главным меню");
+        BotApiMethod<?> callBackAnswer = mainMenuService.getMainMenuMessage(chatId, "Скористуйтеся головним меню");
 
 
-        //From Destiny choose buttons
-        if (buttonQuery.getData().equals("buttonYes")) {
-            callBackAnswer = messagesService.getReplyMessage(chatId,"reply.askName");
-            botDataCache.setUsersCurrentBotState(userId, BotState.FILLING_WEATHER_REQUEST);
-        }else if (buttonQuery.getData().equals("buttonNo")) {
-            callBackAnswer = sendAnswerCallbackQuery("Возвращайся, когда будете готови", false, buttonQuery);
-        } else if (buttonQuery.getData().equals("buttonIwillThink")) {
-            callBackAnswer = sendAnswerCallbackQuery("Данная кнопка не поддерживается", true, buttonQuery);
-        } else {
-            botDataCache.setUsersCurrentBotState(userId, BotState.SHOW_MAIN_MENU);
+        switch (buttonQuery.getData()) {
+            case "buttonYes":
+                callBackAnswer = messagesService.getReplyMessage(chatId, "reply.askName");
+                botDataCache.setUsersCurrentBotState(userId, BotState.FILLING_WEATHER_REQUEST);
+                break;
+            case "buttonNo":
+                callBackAnswer = sendAnswerCallbackQuery("Повертайтеся, коли будете готові", false, buttonQuery);
+                break;
+            case "buttonIwillThink":
+                callBackAnswer = sendAnswerCallbackQuery("Дана кнопка не підтримується", true, buttonQuery);
+                break;
+            case "backMenu":
+                botDataCache.setUsersCurrentBotState(userId, BotState.WELCOME_MENU);
+                break;
+            case "againRain":
+                callBackAnswer = messagesService.getReplyMessage(chatId, "reply.askAnswer1");
+                botDataCache.setUsersCurrentBotState(userId, BotState.FILLING_WEATHER_REQUEST);
+                break;
+            default:
+                botDataCache.setUsersCurrentBotState(userId, BotState.SHOW_MAIN_MENU);
+                break;
         }
         return callBackAnswer;
     }

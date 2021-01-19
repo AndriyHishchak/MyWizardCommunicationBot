@@ -20,11 +20,10 @@ import java.util.List;
 @Component
 public class AskWelcomeHandler implements InputMessageHandler {
 
-    private final BotDataCache botDataCache;
     private final ReplyMessagesService messagesSevice;
 
-    public AskWelcomeHandler(BotDataCache botDataCache, ReplyMessagesService messagesSevice) {
-        this.botDataCache = botDataCache;
+    public AskWelcomeHandler(ReplyMessagesService messagesSevice) {
+
         this.messagesSevice = messagesSevice;
     }
     @Override
@@ -37,6 +36,8 @@ public class AskWelcomeHandler implements InputMessageHandler {
         return BotState.WELCOME_MENU;
     }
 
+
+
     private SendMessage processUsersInput(Message inputMsg) {
         long chatId = inputMsg.getChatId();
 
@@ -48,10 +49,10 @@ public class AskWelcomeHandler implements InputMessageHandler {
     private InlineKeyboardMarkup getInlineMessageButtons() {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
-        InlineKeyboardButton buttonYes = new InlineKeyboardButton().setText("Да");
-        InlineKeyboardButton buttonNo = new InlineKeyboardButton().setText("Нет, спасибо");
+        InlineKeyboardButton buttonYes = new InlineKeyboardButton().setText("Так");
+        InlineKeyboardButton buttonNo = new InlineKeyboardButton().setText("Ні, дякую");
         InlineKeyboardButton buttonIwillThink = new InlineKeyboardButton().setText("Я подумаю");
-        InlineKeyboardButton buttonIdontKnow = new InlineKeyboardButton().setText("Еще не определился");
+        InlineKeyboardButton buttonIdontKnow = new InlineKeyboardButton().setText("Ще не оприділився");
 
         //Every button must have callBackData, or else not work !
         buttonYes.setCallbackData("buttonYes");

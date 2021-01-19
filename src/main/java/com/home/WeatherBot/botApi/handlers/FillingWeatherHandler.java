@@ -11,9 +11,13 @@ import com.home.WeatherBot.model.Weather;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @Component
 public class FillingWeatherHandler implements InputMessageHandler {
@@ -23,7 +27,7 @@ public class FillingWeatherHandler implements InputMessageHandler {
     private final WeatherService weatherService;
     private final Weather weather = new Weather();
     private final UserRepo userRepo;
-    String city;
+    private String city;
     public FillingWeatherHandler(BotDataCache botDataCache, ReplyMessagesService messagesService, WeatherService weatherService,
                                  UserRepo userRepo) {
         this.botDataCache = botDataCache;
@@ -45,6 +49,8 @@ public class FillingWeatherHandler implements InputMessageHandler {
     }
 
 
+
+
     private SendMessage processUserInput(Message inputMessage) throws IOException {
         String usersAnswer = inputMessage.getText();
         long userId = inputMessage.getFrom().getId();
@@ -63,7 +69,7 @@ public class FillingWeatherHandler implements InputMessageHandler {
             botDataCache.setUsersCurrentBotState(userId, BotState.FILLING_WEATHER_REQUEST);
                 savingUserData(userId);
                 replyToUser = new SendMessage(chatId, String.valueOf(weatherService.getWeather(city,weather)));
-
+                replyToUser.setReplyMarkup(getInlineMessageButtons());
         }
         return replyToUser;
     }
@@ -71,10 +77,31 @@ public class FillingWeatherHandler implements InputMessageHandler {
     private void savingUserData (long userId) {
         User user;
         if (!userRepo.existsByIdUser(userId)) {
-            user = new User(userId, null , null, false, new GregorianCalendar());
+            user = new User(userId, city, false, new GregorianCalendar());
             userRepo.save(user);
         }
+    }
 
+    private InlineKeyboardMarkup getInlineMessageButtons() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+        InlineKeyboardButton backMenu = new InlineKeyboardButton().setText("Повернутися в головне меню \uD83D\uDD79");
+        InlineKeyboardButton againRain = new InlineKeyboardButton().setText("Переглянути погоду щераз ⛈");
+        backMenu.setCallbackData("backMenu");
+        againRain.setCallbackData("againRain");
+
+        List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
+        keyboardButtonsRow1.add(backMenu);
+
+        List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
+        keyboardButtonsRow2.add(againRain);
+
+        List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+        rowList.add(keyboardButtonsRow1);
+        rowList.add(keyboardButtonsRow2);
+
+        inlineKeyboardMarkup.setKeyboard(rowList);
+        return inlineKeyboardMarkup;
     }
 
 

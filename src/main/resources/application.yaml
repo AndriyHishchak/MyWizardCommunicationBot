@@ -1,11 +1,11 @@
 server:
-  port: 8056
+  port: 8131
 
 localeTag: "ru-RU"
 
 telegram-bot:
   botUserName: ${BOT_USERNAME}
-  botToken: ${BOT_TOKEN}
+  #botToken: ${BOT_TOKEN}
   webHookPath: ${WEBHOOK_PATH}
 
 spring:
@@ -17,4 +17,15 @@ spring:
   jpa:
     hibernate.ddl-auto: create
     generate-ddl: true
-    show-sql: true
+    #show-sql: true
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+#jobStore:
+#  useProperties: true
+
+
+
+
+

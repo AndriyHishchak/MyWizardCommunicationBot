@@ -1,9 +1,13 @@
 package com.home.WeatherBot.cache;
 
 import com.home.WeatherBot.botApi.BotState;
+import com.home.WeatherBot.botApi.jobs.Jobs;
 import com.home.WeatherBot.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +15,7 @@ import java.util.Map;
 public class BotDataCache implements DataCache {
 
    private final Map<Long,BotState> usersBotStates = new HashMap<>();
-   private final Map<Long, User> profileForms = new HashMap<>();
+   private static final Logger LOG =  LoggerFactory.getLogger(BotDataCache.class);
 
     @Override
     public BotState getUsersCurrentBotState(long userId) {
@@ -22,18 +26,11 @@ public class BotDataCache implements DataCache {
         return botState;
     }
 
-    @Override
-    public User getUserData(long userId) {
-        User user = profileForms.get(userId);
-        if (user == null) {
-            user = new User();
-        }
-        return user;
-    }
+
     @Override
     public void setUsersCurrentBotState(long userId, BotState botState) {
          usersBotStates.put(userId,botState);
-         System.out.println("Бот User ["+userId+"] в состояниє - ["+botState+"]");
+         LOG.info("Бот User ["+userId+"] в состояниє - ["+botState+"] [ " + new Date() + " ]");
 
     }
 

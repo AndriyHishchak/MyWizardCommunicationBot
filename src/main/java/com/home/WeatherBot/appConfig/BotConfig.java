@@ -14,6 +14,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @Getter
 @Configuration
 @ConfigurationProperties(prefix = "telegrambot")
+
 public class BotConfig {
 
     private String webHookPath;

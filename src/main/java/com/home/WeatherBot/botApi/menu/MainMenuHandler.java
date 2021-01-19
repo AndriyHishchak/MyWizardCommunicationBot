@@ -12,8 +12,8 @@ import java.io.IOException;
 @Component
 public class MainMenuHandler implements InputMessageHandler {
 
-    private ReplyMessagesService messagesService;
-    private MainMenuService mainMenuService;
+    private final ReplyMessagesService messagesService;
+    private final MainMenuService mainMenuService;
 
     public MainMenuHandler(ReplyMessagesService messagesService, MainMenuService mainMenuService) {
         this.messagesService = messagesService;
@@ -28,6 +28,6 @@ public class MainMenuHandler implements InputMessageHandler {
 
     @Override
     public BotState getHandlerName() {
-        return BotState.SHOW_HELP_MENU;
+        return BotState.SHOW_MAIN_MENU;
     }
 }

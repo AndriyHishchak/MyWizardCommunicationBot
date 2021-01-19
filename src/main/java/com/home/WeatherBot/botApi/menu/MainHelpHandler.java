@@ -13,8 +13,8 @@ import java.io.IOException;
 @Component
 public class MainHelpHandler implements InputMessageHandler {
 
-    private ReplyMessagesService messagesService;
-    private MainMenuService mainMenuService;
+    private final ReplyMessagesService messagesService;
+    private final MainMenuService mainMenuService;
 
     public MainHelpHandler(ReplyMessagesService messagesService, MainMenuService mainMenuService) {
         this.messagesService = messagesService;

@@ -4,9 +4,11 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.io.Serializable;
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Weather {
+public class Weather  implements Serializable {
 
     String name;
     Double temp;
@@ -22,7 +24,7 @@ public class Weather {
                 "| Temperature : " + temp + "C \uD83D\uDCCD" + " \n" +
                 "| Humidity : " + humidity + "% \uD83D\uDCA6" + "\n" +
                 "| "+"http://openweathermap.org/img/wn/" + icon + ".png" + "\n" +
-                "| Єсли снова хотите узнать погоду [ /show_weather ]" + "\n" +
+                "| Якщо ви знову хочете дізнатися погоду [ /show_weather ]" + "\n" +
                 " --------------------------------------------------------------------------------------------"
                 ;
     }

@@ -47,8 +47,10 @@ public class BotStateContext{
             case ASK_CITY_BY_SUBSCRIPTION:
             case ASK_TIME_BY_SUBSCRIPTION:
             case ADD_SUBSCRIPTION:
+            case DELETE_SUBSCRIPTION:
             case GET_SUBSCRIPTION_BY_CITY:
             case GET_SUBSCRIPTION_BY_TIME:
+            case SEND:
                 return true;
             default:
                 return false;

@@ -31,6 +31,7 @@ public class WeatherTelegramBot extends TelegramWebhookBot {
         return replyMessageToUser;
     }
 
+
     @Override
     public String getBotUsername() {
         return botName;

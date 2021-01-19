@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 @Service
 public class WeatherService {
 
     public Weather getWeather(String cityName, Weather weather) throws IOException {
-        System.out.println("!!!!!!! "+ cityName+ "!!!!!!!!!");
+        System.out.println("[ "+ cityName+ " ]");
         URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=metric&appid=b805ebd38f800bf523655a502bb5be62");
 
 
@@ -39,5 +40,9 @@ public class WeatherService {
         }
 
         return weather;
+    }
+    public void getCityWather(String cityName) throws MalformedURLException {
+        System.out.println("[ "+ cityName+ " ]");
+        URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=metric&appid=b805ebd38f800bf523655a502bb5be62");
     }
 }

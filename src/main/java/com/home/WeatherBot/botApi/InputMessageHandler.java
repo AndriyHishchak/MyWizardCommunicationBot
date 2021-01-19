@@ -10,4 +10,6 @@ public interface InputMessageHandler {
     SendMessage handle (Message message) throws IOException;
 
     BotState getHandlerName();
+
+
 }
